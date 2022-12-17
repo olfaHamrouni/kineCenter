@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<title>Profil d'un utilisateur</title>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<meta charset="windows-1256"/>
+
+</head>
+<body>
+<div layout:fragment="Mycontent">
+
+<div class="container mt-5">
+<div class="card">
+<div class="card-header"> Profil d'un utilisateur </div>
+<div class="card-body">
+<form th:action="@{updateUser}" method="post">
+	
+	<div class="form-group">
+	 
+	 <input type="text"  name="user_id" class="form-control" th:value="${user.user_id}" hidden/>
+	<span th:errors=${user.user_id} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	 <label class="control-label">Username :</label>
+	 <input type="text" disabled name="username" class="form-control" th:value="${user.username}" pattern="[a-zA-Z0-9]{6,}" required/>
+	<span th:errors=${user.username} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group" style="display:none">
+	<label class="control-label">Password :</label>
+	<input type="password" name="password" class="form-control" th:value="${user.password}" pattern="[a-zA-Z0-9]{6,}" required/>
+	<span th:errors=${user.password} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Nom et prénom :</label>
+	<input type="text" disabled name="nomPrenom" class="form-control" th:value="${user.nomPrenom}" pattern="[a-zA-Z ]+" required/>
+	<span th:errors=${user.nomPrenom} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Email :</label>
+	<input type="email" disabled name="email" class="form-control" th:value="${user.email}" pattern="[a-zA-Z0-9-_.]+@[a-zA-Z]+\.[a-zA-Z]{2,3}" required/>
+	<span th:errors=${user.email} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Téléphone :</label>
+	<input type="text" name="tel" disabled class="form-control" th:value="${user.tel}" pattern="[0-9]{8}" required/>
+	<span th:errors=${user.tel} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	
+	<input type="text" name="role" class="form-control" th:value="${user.role}" hidden/>
+	
+	</div>
+	
+	<div class="form-group">
+	
+	<input type="text" name="enabled" class="form-control" th:value="${user.enabled}" hidden/>
+	
+	</div>
+	
+	<div>
+	<span th:text=${msg} class="text-danger"> </span>
+	</div>
+</form>
+
+</div>
+ </div>
+ </div>
+ 
+</div>
+
+</body>
+</html>

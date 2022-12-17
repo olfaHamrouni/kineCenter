@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Liste des produits</title>
+<style>
+.titre{font-size:200%; color:darkgreen;font-weight:bold;}
+.categ{font-weight:bold;font-size:200%;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+ <div class="card-header">
+ Liste des produits
+ </div>
+ <div class="card-body">
+	<div class="text-right font-weight-bold">
+		<a class="text-success" th:href="@{showProduit}" sec:authorize="hasRole('ADMIN')">Ajouter produit</a><br/>
+	 </div>
+	
+	<table class="table table-striped" border="1px">
+ <tr>
+ <th>Libellé produit</th><th>Prix (en DT)</th><th>Quantité Stock (en unité)</th><th>Photo</th>
+ <th sec:authorize="hasRole('ADMIN')">Etat</th><th sec:authorize="hasAnyRole('ADMIN','USER')">Action</th>
+ </tr>
+ <tr th:each="p:${prods}">
+	 <td th:text="${p.libelleProduit}"></td>
+	 <td th:text="${p.prixProduit}"></td>
+	 <td th:text="${p.qteStock}"></td>
+	 <td>
+	 	<img th:src="@{getPhoto(NP = ${p.photoProduit} , id = ${p.idProduit})}" width="50%" height="50%"/></td>
+	 <td th:text="${p.etatProduit}" sec:authorize="hasRole('ADMIN')"></td>
+	 <td sec:authorize="hasRole('ADMIN')">
+	 	<a  class="btn btn-danger  btn-sm mb-2" onclick="return confirm('Etes-vous sûr ?')" th:href="@{supprimerProduit(id=${p.idProduit})}">
+ 	 	Delete</a>	
+ 	 	<a  class="btn btn-secondary  btn-sm mb-2" th:href="@{modifierProduit(id=${p.idProduit})}">
+ 	 	Edit</a>	
+	  </td>	
+	  
+ </tr>
+ </table>
+	
+ </div>
+</div>
+</div>
+</div>
+</body>
+</html>

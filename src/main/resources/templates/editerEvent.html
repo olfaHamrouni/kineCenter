@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<title>Editer un évènement</title>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<meta charset="windows-1256"/>
+
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+<div class="card-header"> Editer un évènement </div>
+<div class="card-body">
+<form th:action="@{updateEvent}" method="post">
+	<div class="form-group">
+	 <label class="control-label" hidden>Id évènement :</label>
+	 <input type="text"  name="idEvent" class="form-control" th:value="${evt.idEvent}" hidden/>
+	<span th:errors=${evt.idEvent} class="text-danger"> </span>
+	</div>
+	<div class="form-group">
+	 <label class="control-label">Nom évènement :</label>
+	 <input type="text" name="nomEvent" class="form-control" th:value="${evt.nomEvent}" required/>
+	<span th:errors=${evt.nomEvent} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Description évènement :</label>
+	<input type="text" name="descEvent" class="form-control" th:value="${evt.descEvent}" />
+	<span th:errors=${evt.descEvent} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Date évènement :</label>
+	<input type="date" name="dateEvent" class="form-control" th:value="${localDate}" required/>
+	<span th:errors=${evt.dateEvent} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Lieu évènement :</label>
+	<input type="text" name="lieuEvent" class="form-control" th:value="${evt.lieuEvent}" required />
+	<span th:errors=${evt.lieuEvent} class="text-danger"> </span>
+	</div>
+	
+	<div>
+	<button type="submit" class="btn btn-primary">Modifier</button>
+	</div>
+	
+</form>
+
+</div>
+ </div>
+ </div>
+</div>
+<!--<a href="ListeProduits">Liste Produits</a>-->
+</body>
+</html>

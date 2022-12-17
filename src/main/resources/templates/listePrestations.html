@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Liste des prestations</title>
+<style>
+.titre{font-size:200%; color:darkgreen;font-weight:bold;}
+.categ{font-weight:bold;font-size:200%;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+ <div class="card-header">
+ Liste des prestations
+ </div>
+ <div class="card-body">
+	<div class="text-right font-weight-bold" sec:authorize="hasRole('ADMIN')">
+		<a class="text-success" th:href="@{showPrestation}">Ajouter prestation</a><br/>
+	 </div>
+	<div class="container"><div class="row">
+	<div class="col-12"><div class="categ">Soin de visages</div></div></div></div>
+	
+	<div class="container px-4">
+	<div class="row px-4">
+	<div class="col-6 bg-light gx-4 border border-success shadow rounded text-center" th:each="p:${prestas1}">
+  			<div class="titre" th:text="${p.libellePresta}"></div>
+	 		<div th:text="${p.dureePresta}"></div>
+	 		<div th:text="${p.prixPresta}" style="display:inline"></div>&nbsp<span>DT</span>
+	 		<div sec:authorize="hasRole('ADMIN')">
+	 			<a class="btn btn-danger btn-sm mb-2" onclick="return confirm('Etes-vous sûr ?')" 
+	 				th:href="@{supprimerPrestation(id=${p.idPresta})}">
+	 				Delete
+	 			</a>
+	 			<a  class="btn btn-secondary btn-sm mb-2" th:href="@{modifierPrestation(id=${p.idPresta})}">
+	 				Edit
+	 			</a>
+ 	 		</div>
+	</div> 
+	</div>
+	</div>
+	
+	<div class="container"><div class="row">
+	<div class="col-12"><div class="categ">Cure d'amincissement</div></div></div></div>
+	
+	<div class="container px-4">
+	<div class="row px-4">
+	<div class="col-6 bg-light gx-4 border border-success shadow rounded text-center" th:each="p:${prestas2}">
+  			<div class="titre" th:text="${p.libellePresta}"></div>
+	 		<div th:text="${p.dureePresta}"></div>
+	 		<div th:text="${p.prixPresta}" style="display:inline"></div>&nbsp<span>DT</span>
+	 		<div sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger btn-sm mb-2" onclick="return confirm('Etes-vous sûr ?')" 
+	 			th:href="@{supprimerPrestation(id=${p.idPresta})}">Delete</a>
+	 		<a  class="btn btn-secondary btn-sm mb-2" th:href="@{modifierPrestation(id=${p.idPresta})}">Edit</a>
+ 	 		</div> 
+	</div>
+	</div>
+	
+	<div class="container"><div class="row">
+	<div class="col-12"><div class="categ">Massages</div></div></div></div>
+	
+	<div class="container px-4">
+	<div class="row px-4">
+	<div class="col-6 bg-light gx-4 border border-success shadow rounded text-center" th:each="p:${prestas3}">
+  			<div class="titre" th:text="${p.libellePresta}"></div>
+	 		<div th:text="${p.dureePresta}"></div>
+	 		<div th:text="${p.prixPresta}" style="display:inline"></div>&nbsp<span>DT</span>
+	 		<div sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger btn-sm mb-2" onclick="return confirm('Etes-vous sûr ?')" 
+	 			th:href="@{supprimerPrestation(id=${p.idPresta})}">Delete</a>
+	 			<a  class="btn btn-secondary btn-sm mb-2" th:href="@{modifierPrestation(id=${p.idPresta})}">Edit</a>
+ 	 		</div>
+	</div> 
+	</div>
+	</div>
+
+ </div>
+</div>
+</div>
+</div>
+</body>
+</html>

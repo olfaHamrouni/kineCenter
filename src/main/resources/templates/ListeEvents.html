@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Liste des évènements</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+ <div class="card-header">
+ Liste des Evènements
+ </div>
+ <div class="card-body">
+	<div class="text-right font-weight-bold" sec:authorize="hasRole('ADMIN')">
+		<a class="text-success" th:href="@{showCreate}">Ajouter event</a>
+	 </div>
+ <table class="table table-striped">
+ <tr>
+ <th>Nom Evènement</th><th>Description Evènement</th><th>Date Evènement</th><th>Lieu Evènement</th><th sec:authorize="hasRole('ADMIN')">Action</th>
+ </tr>
+ <tr th:each="e:${events}">
+	 <td th:text="${e.nomEvent}"></td>
+	 <td th:text="${e.descEvent}"></td>
+	 <td th:text="${#calendars.format(e.dateEvent,'dd/MM/yyyy')}"></td>
+	 <td th:text="${e.lieuEvent}"></td>
+	 <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger btn-sm mb-2" onclick="return confirm('Etes-vous sûr ?')" 
+	 th:href="@{supprimerEvent(id=${e.idEvent})}">Delete</a>
+ 	 <a  class="btn btn-secondary btn-sm mb-2" th:href="@{modifierEvent(id=${e.idEvent})}">
+ 	 Edit</a></td>
+ </tr>
+ </table>
+ </div>
+</div>
+</div>
+</div>
+</body>
+</html>

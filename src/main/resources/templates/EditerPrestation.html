@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<title>Editer une prestation</title>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<meta charset="windows-1256"/>
+
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+<div class="card-header"> Editer une prestation </div>
+<div class="card-body">
+<form th:action="@{updatePrestation}" method="post">
+	<div class="form-group">
+	 <label class="control-label" hidden>Id prestation :</label>
+	 <input type="text"  name="idPresta" class="form-control" th:value="${presta.idPresta}" hidden/>
+	<span th:errors=${presta.idPresta} class="text-danger"> </span>
+	</div>
+	<div class="form-group">
+	 <label class="control-label">Libellé prestation :</label>
+	 <input type="text" name="libellePresta" class="form-control" th:value="${presta.libellePresta}" required/>
+	<span th:errors=${presta.libellePresta} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Durée prestation :</label>
+	<input type="text" name="dureePresta" class="form-control" th:value="${presta.dureePresta}" />
+	<span th:errors=${presta.dureePresta} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Prix prestation :</label>
+	<input type="text" name="prixPresta" class="form-control" th:value="${presta.prixPresta}" required/>
+	<span th:errors=${presta.prixPresta} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Catégorie prestation :</label>
+	<select name="categPresta" class="form-control" th:value="${presta.categPresta}" required>
+		<option> Soin de visage</option>
+		<option> Cure d'amincissement</option>
+		<option> Massages</option>
+	</select>
+	<span th:errors=${presta.categPresta} class="text-danger"> </span>
+	</div>
+	
+	<div>
+	<button type="submit" class="btn btn-primary">Modifier</button>
+	</div>
+	
+</form>
+
+</div>
+ </div>
+ </div>
+</div>
+<!--<a href="ListeProduits">Liste Produits</a>-->
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<title>Ajout d'un produit'</title>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<meta charset="windows-1256"/>
+
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div>
+	<span th:text=${msg} class="text-danger"> </span>
+</div>
+<div class="container mt-5">
+<div class="card">
+<div class="card-header"> Ajout d'un produit </div>
+<div class="card-body">
+<form th:action="@{saveProduit}" method="post" enctype="multipart/form-data">
+	
+	<div class="form-group">
+	 <label class="control-label">Libellé produit <span class="text-danger">*</span> :</label>
+	 <input type="text" name="libelleProduit" class="form-control" placeholder="saisir le nom du produit (au minimum 4 caractères)"/>
+	<span th:errors=${produit.libelleProduit} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Prix produit <span class="text-danger">*</span> :</label>
+	<input type="number" name="prixProduit" class="form-control" min="5" placeholder="saisir un nombre"/>
+	<span th:errors=${produit.prixProduit} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Quantité en stock <span class="text-danger">*</span>:</label>
+	<input type="number" name="qteStock" class="form-control" placeholder="saisir un nombre"/>
+	<span th:errors=${produit.qteStock} class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Photo produit <span class="text-danger">*</span> :</label>
+	<input type="file" name="picture" class="form-control" accept="image/png, image/jpeg, image/jpg" placeholder="fichier image"/>
+	<span th:errors=${produit.photoProduit} class="text-danger"> </span>
+	</div>
+	
+	<input type="text" name="etatProduit" class="form-control" hidden value="1"/>
+	
+	<div>
+	<button type="submit" class="btn btn-primary">Save</button>
+	</div>
+	
+</form>
+
+</div>
+ </div>
+ </div>
+ 
+</div>
+
+</body>
+</html>

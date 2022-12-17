@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<title>Créer une prestation</title>
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<meta charset="windows-1256"/>
+
+</head>
+<body>
+<div layout:fragment="Mycontent">
+
+<div class="container mt-5">
+<div class="card">
+<div class="card-header"> Ajout de prestation </div>
+<div class="card-body">
+<form th:action="@{savePrestation}" method="post">
+	<div class="form-group">
+	 <label class="control-label">Libellé Prestation :</label>
+	 <input type="text" name="libellePresta" class="form-control" required/>
+	<span th:errors="${prestation.libellePresta}" class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Durée Prestation :</label>
+	<input type="text" name="dureePresta" class="form-control" required/>
+	<span th:errors="${prestation.dureePresta}" class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Prix Prestation (en DT) :</label>
+	<input type="number" name="prixPresta" min="10" max="2000" class="form-control" required/>
+	<span th:errors="${prestation.prixPresta}" class="text-danger"> </span>
+	</div>
+	
+	<div class="form-group">
+	<label class="control-label">Catégorie Prestation :</label>
+	<select name="categPresta" class="form-control" required>
+		<option> Soin de visage</option>
+		<option> Cure d'amincissement</option>
+		<option> Massages</option>
+	</select>
+	<span th:errors="${prestation.categPresta}" class="text-danger"> </span>
+	</div>
+	
+	<div>
+	<button type="submit" class="btn btn-primary">Ajouter</button>
+	</div>
+	<div>
+	<span th:text=${msg} class="text-danger"> </span>
+	</div>
+</form>
+
+</div>
+ </div>
+ </div>
+ 
+</div>
+
+</body>
+</html>

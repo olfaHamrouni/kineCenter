@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+ layout:decorator="index">
+<link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+<meta charset="utf-8">
+<title>Liste des clients</title>
+</head>
+<body>
+<div layout:fragment="Mycontent">
+<div class="container mt-5">
+<div class="card">
+ <div class="card-header">
+ Liste des Clients
+ </div>
+ <div class="card-body">
+	
+ <table class="table table-striped">
+ <tr>
+ <th>Username Client</th><th>Nom et prénom Client</th><th>Email client</th><th>Téléphone Client</th>
+ <th>Etat</th><th>Action</th>
+ </tr>
+ <tr th:each="u:${users}">
+	 <td th:text="${u.username}"></td>
+	 <td th:text="${u.nomPrenom}"></td>
+	 <td th:text="${u.email}"></td>
+	 <td th:text="${u.tel}"></td>
+	 <td th:text="${u.enabled} ? 'ACTIF' : 'RETIRE'"></td>
+	 <td><a class="btn btn-danger btn-sm mb-2" onclick="return confirm('Etes-vous sûr ?')" 
+	 th:href="@{supprimerUser(id=${u.user_id})}">Delete</a>
+	 <a  class="btn btn-success btn-sm mb-2" th:href="@{changerEtat(id=${u.user_id},e=${u.enabled})}">
+	 <span th:text="${u.enabled} ? 'Des' : 'Act'"></span>
+	 </a>
+	 </td>
+	 
+ </tr>
+ </table>
+ </div>
+</div>
+</div>
+</div>
+</body>
+</html>
